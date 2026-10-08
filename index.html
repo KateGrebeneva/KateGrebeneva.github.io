@@ -17,7 +17,7 @@
 <meta name="twitter:description" content="Portfolio of Catherine Grebeneva — full-stack developer and digital designer.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Inter+Tight:ital,wght@0,300..700;1,300..500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Inter+Tight:ital,wght@0,300..700;1,300..500&display=swap" rel="stylesheet">
 <script>document.documentElement.classList.add('js');</script>
 <style>
 /* ==========================================================================
@@ -29,7 +29,8 @@
    COLOR  — paper (blush ivory) · ink (true black) · charcoal · smoke
             accent: fuchsia, inherited from the old pink portfolio, used
             only as a "printer's mark" (issue number, active states).
-   TYPE   — Bodoni Moda: mastheads, numerals, headlines, italic accents.
+   TYPE   — Playfair Display (Didone, Vogue-like): mastheads, headlines, italics.
+            Bodoni Moda: numerals only.
             Inter Tight: body, captions, labels.
             Scale contrast: 13vw masthead vs 11px captions.
    SPACE  — 4px base; section rhythm --sec; margins --m; gutter --g.
@@ -52,7 +53,8 @@
   --inv-smoke:#8F8884;
   --inv-line:rgba(242,237,234,.16);
 
-  --f-display:"Bodoni Moda","Bodoni 72","Didot","Bodoni MT",Georgia,"Times New Roman",serif;
+  --f-display:"Playfair Display","Didot","Bodoni 72",Georgia,"Times New Roman",serif;
+  --f-num:"Bodoni Moda","Bodoni 72","Didot","Bodoni MT",Georgia,serif;
   --f-sans:"Inter Tight","Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;
 
   --fs-name:clamp(2.4rem,13.2vw,17rem);
@@ -98,7 +100,6 @@ body{
   margin:0;background:var(--paper);color:var(--ink);
   font-family:var(--f-sans);font-size:var(--fs-b);line-height:1.6;font-weight:400;
   -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
-  font-variation-settings:"opsz" 16;
   overflow-x:hidden;text-rendering:optimizeLegibility;
 }
 @supports (overflow:clip){body{overflow-x:clip}}
@@ -124,7 +125,6 @@ ul,ol{padding:0;list-style:none}
 .cap{font-size:var(--fs-xs);line-height:1.45;letter-spacing:.18em;text-transform:uppercase;font-weight:500}
 .cap--soft{color:var(--smoke)}
 .disp{font-family:var(--f-display);font-weight:400;line-height:.9;letter-spacing:-.03em;font-optical-sizing:auto}
-.hero__n,.case__title,.idea__w,.creamy__vt,.approach__title,.contact__title,.studly__num,.fire__num,.idea__num,.creamy__num,.marq__set span{font-variation-settings:"opsz" 9}
 .it{font-family:var(--f-display);font-style:italic;font-weight:400;letter-spacing:-.01em}
 .num{font-family:var(--f-display);font-weight:400;font-variant-numeric:lining-nums;line-height:.8}
 .rule{border:0;border-top:1px solid var(--line);margin:0}
@@ -224,7 +224,7 @@ figcaption{margin-top:12px;display:flex;justify-content:space-between;gap:16px;c
 .hero__top{grid-column:1/-1;grid-row:1;display:flex;justify-content:space-between;gap:16px;padding-bottom:14px;border-bottom:1px solid var(--line)}
 .hero__top .acc{color:var(--accent)}
 .hero__n{grid-column:1/-1;font-family:var(--f-display);font-weight:400;font-size:var(--fs-name);line-height:.8;letter-spacing:-.035em;text-transform:uppercase;white-space:nowrap;position:relative}
-.hero__n--1{grid-row:2;margin-top:clamp(18px,2.6vw,44px);z-index:1}
+.hero__n--1{grid-row:2;margin-top:clamp(18px,2.6vw,44px);z-index:3;color:#fff;mix-blend-mode:difference}
 .hero__n--2{grid-row:4;justify-self:end;z-index:3;color:#fff;mix-blend-mode:difference}
 .hero__photo{grid-column:5/9;grid-row:3;z-index:2;position:relative;margin-top:calc(var(--fs-name) * -.4);margin-bottom:calc(var(--fs-name) * -.52)}
 .hero__photo .frame{aspect-ratio:4/5}
@@ -251,6 +251,7 @@ figcaption{margin-top:12px;display:flex;justify-content:space-between;gap:16px;c
 /* page-load orchestration for the cover */
 .js .hero [data-load]{opacity:0;transition:opacity 1.2s var(--ease) calc(var(--d,0) * 120ms + 400ms)}
 .js.is-loaded .hero [data-load]{opacity:1}
+.cover-done .hero [data-load]{transition:none}
 .js .hero .hero__photo .frame{clip-path:inset(0 0 100% 0);transition:clip-path 1.6s var(--ease-io) .35s}
 .js .hero .hero__photo .frame img{transform:scale(1.2);transition:transform 2.4s var(--ease) .35s}
 .js.is-loaded .hero .hero__photo .frame{clip-path:inset(0)}
@@ -291,7 +292,7 @@ figcaption{margin-top:12px;display:flex;justify-content:space-between;gap:16px;c
 .index__item:hover .t{font-style:italic;transform:translateX(clamp(8px,1.5vw,28px))}
 .index__item .arr{display:inline-block;transition:transform .6s var(--ease)}
 .index__item:hover .arr{transform:translate(3px,-3px)}
-.preview{position:fixed;left:0;top:0;z-index:20;width:clamp(260px,26vw,420px);aspect-ratio:16/10;pointer-events:none;opacity:0;transform:translate3d(-50%,-50%,0) scale(.9);transition:opacity .35s,transform .6s var(--ease);overflow:hidden;background:var(--ink)}
+.preview{position:fixed;left:0;top:0;z-index:20;width:clamp(260px,26vw,420px);aspect-ratio:16/10;pointer-events:none;opacity:0;transform:translate3d(-50%,-50%,0);overflow:hidden;background:var(--ink)}
 .preview.is-on{opacity:1}
 .preview img{width:100%;height:100%;object-fit:cover}
 .preview__t{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--paper);font-family:var(--f-display);font-style:italic;font-size:2.4rem;text-align:center;padding:16px}
@@ -360,9 +361,9 @@ figcaption{margin-top:12px;display:flex;justify-content:space-between;gap:16px;c
 .idea__kick .acc{color:var(--accent)}
 .idea__stage{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--g);align-items:center}
 .idea__w{font-family:var(--f-display);font-weight:400;font-size:clamp(4.2rem,19vw,22rem);line-height:.78;letter-spacing:-.05em}
-.idea__w--1{grid-column:1/9;grid-row:1;font-style:italic;position:relative;z-index:1}
+.idea__w--1{grid-column:1/9;grid-row:1;font-style:italic;position:relative;z-index:3;color:#fff;mix-blend-mode:difference}
 .idea__w--2{grid-column:5/13;grid-row:3;justify-self:end;position:relative;z-index:3;color:#fff;mix-blend-mode:difference;margin-top:calc(clamp(4.2rem,19vw,22rem) * -.42)}
-.idea__obj{grid-column:4/10;grid-row:2;position:relative;z-index:2;margin-top:calc(clamp(4.2rem,19vw,22rem) * -.3);display:block}
+.idea__obj{grid-column:4/10;grid-row:2;position:relative;z-index:2;margin-top:calc(clamp(4.2rem,19vw,22rem) * -.14);display:block}
 .idea__notes{grid-row:2;display:flex;flex-direction:column;gap:clamp(60px,9vw,150px)}
 .idea__notes--l{grid-column:1/4;text-align:right}
 .idea__notes--r{grid-column:10/13;align-self:start;gap:clamp(32px,3.5vw,56px);padding-top:clamp(8px,1.5vw,24px)}
@@ -647,9 +648,45 @@ figcaption{margin-top:12px;display:flex;justify-content:space-between;gap:16px;c
   .approach__out p span:nth-child(n){margin-right:0}
 }
 
+/* Bodoni Moda, heavier: keeps the high-contrast display cut but gives the hairlines body */
+.disp,.hero__n,.case__title,.idea__w,.creamy__vt,.num,.marq__set span,.curtain__name,.menu__list a,.index__item .t,.exp__p,.contact__links .h,.hero__cover b,.ifc__h,.mini__h,.logo,.deck__box ol,.about__meta dd,.preview__t,.ifc__nav b{font-weight:500}
+.lead,.it,.off__quote,.hero__quote,.about__text p:first-child::first-letter{font-weight:400}
+/* numerals keep Bodoni Moda */
+.num,.index__item .n{font-family:var(--f-num);font-weight:560}
+/* ==========================================================================
+   SCROLL & TRANSITIONS
+   ========================================================================== */
+.has-smooth,.has-smooth body{scroll-behavior:auto!important}
+.head{transition:padding .6s var(--ease),transform .7s var(--ease)}
+.head-away .head{transform:translate3d(0,-110%,0)}
+.hero__n,.hero__photo,.hero__side,.hero__cover{will-change:translate}
+.marq-js .marq__track{animation:none}
+.preview{transition:opacity .35s,scale .6s var(--ease);scale:.92}
+.preview.is-on{scale:1}
+.preview__layer{position:absolute;inset:0;clip-path:inset(100% 0 0 0);transition:clip-path .6s var(--ease-io)}
+.preview__layer.is-on{clip-path:inset(0)}
+.preview__layer img{width:100%;height:100%;object-fit:cover;transform:scale(1.15);transition:transform .9s var(--ease)}
+.preview__layer.is-on img{transform:none}
+/* page-turn curtain */
+.curtain{position:fixed;inset:0;z-index:150;pointer-events:none;background:var(--ink);color:var(--paper);
+  display:grid;grid-template-rows:auto 1fr auto;padding:calc(env(safe-area-inset-top,0px) + 24px) var(--m) calc(env(safe-area-inset-bottom,0px) + 24px);
+  clip-path:inset(100% 0 0 0);visibility:hidden}
+.curtain.is-in{visibility:visible;pointer-events:auto;clip-path:inset(0);transition:clip-path .72s var(--ease-io)}
+.curtain.is-out{clip-path:inset(0 0 100% 0);transition:clip-path .85s var(--ease-io)}
+.curtain__top,.curtain__bot{display:flex;justify-content:space-between;gap:16px;font-size:var(--fs-xs);letter-spacing:.18em;text-transform:uppercase;font-weight:500;opacity:.7}
+.curtain__mid{align-self:center;display:flex;flex-direction:column;align-items:center;gap:18px;text-align:center}
+.curtain__mid .ln{padding-bottom:.24em;margin-bottom:-.24em}
+.curtain__num{font-family:var(--f-sans);font-size:var(--fs-xs);letter-spacing:.24em;text-transform:uppercase}
+.curtain__name{font-family:var(--f-display);font-style:italic;font-size:clamp(3rem,11vw,12rem);line-height:.9;letter-spacing:-.03em}
+.curtain .ln>span{display:inline-block;transform:translate3d(0,110%,0);transition:transform .9s var(--ease) .28s}
+.curtain.is-in .ln>span{transform:none}
+.curtain.is-out .ln>span{transform:translate3d(0,-110%,0);transition:transform .6s var(--ease-io)}
+.curtain__bar{height:1px;background:currentColor;opacity:.5;transform:scaleX(0);transform-origin:left}
+.curtain.is-in .curtain__bar{transform:scaleX(1);transition:transform 1.1s var(--ease-io) .1s}
+
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition-duration:.01ms!important;transition-delay:0s!important}
-  .js .ln>span,.js [data-reveal],.js [data-reveal] .frame,.js [data-reveal] .frame img,.js .hero [data-load],.js .hero .hero__photo .frame,.js .hero .hero__photo .frame img,.js .fire__stage .browser,.js .fire__stage .browser__shot img{transform:none!important;opacity:1!important;clip-path:none!important}
+  .js .ln>span,.js [data-reveal],.js [data-reveal] .frame,.js [data-reveal] .frame img,.js .hero [data-load],.js .hero .hero__photo .frame,.js .hero .hero__photo .frame img,.js .fire__stage .browser,.js .fire__stage .browser__shot img,.curtain .ln>span{transform:none!important;opacity:1!important;clip-path:none!important}
   .pipe .fg-sel,.pipe .pipe__code .cl,.pipe .mini__page>*{opacity:1;transform:none}
   .pipe__arrow::after{transform:none}
   .marq__track{width:auto;flex-wrap:wrap}
@@ -693,6 +730,11 @@ figcaption{margin-top:12px;display:flex;justify-content:space-between;gap:16px;c
   <div class="rail__label">Cover</div>
 </div>
 
+<div class="curtain" aria-hidden="true">
+  <div class="curtain__top"><span>Catherine Grebeneva</span><span>Issue 01 / 2026</span></div>
+  <div class="curtain__mid"><span class="ln"><span class="curtain__num">01</span></span><span class="ln"><span class="curtain__name">Profile</span></span></div>
+  <div><div class="curtain__bar"></div><div class="curtain__bot" style="margin-top:12px"><span>Turning the page</span><span>Design / Code / Digital Products</span></div></div>
+</div>
 <div class="cursor" aria-hidden="true"><div class="cursor__dot"><span class="cursor__lab">View ↗</span></div></div>
 <div class="preview" aria-hidden="true"></div>
 
@@ -1138,62 +1180,247 @@ figcaption{margin-top:12px;display:flex;justify-content:space-between;gap:16px;c
   const fine = matchMedia('(hover: hover) and (pointer: fine)');
   const $ = (s, c = document) => c.querySelector(s);
   const $$ = (s, c = document) => [...c.querySelectorAll(s)];
+  const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+  const maxY = () => document.documentElement.scrollHeight - innerHeight;
+  const easeIO = t => t < .5 ? 16 * t ** 5 : 1 - (-2 * t + 2) ** 5 / 2;   /* quint in-out */
 
-  /* cover load sequence */
+  /* ------------------------------------------------------------------
+     1. COVER LOAD SEQUENCE
+     ------------------------------------------------------------------ */
   const load = () => requestAnimationFrame(() => {
     root.classList.add('is-loaded');
     $$('.hero .ln').forEach(l => l.classList.add('in'));
+    setTimeout(() => root.classList.add('cover-done'), 2200);
   });
   (document.fonts && document.fonts.ready ? Promise.race([document.fonts.ready, new Promise(r => setTimeout(r, 900))]) : Promise.resolve()).then(load);
 
-  /* reveal on scroll */
+  /* ------------------------------------------------------------------
+     2. SMOOTH SCROLL — inertial wheel scrolling on desktop pointers.
+        Native scroll stays the source of truth (keyboard, scrollbar,
+        touch, find-in-page all keep working); we only ease the wheel.
+     ------------------------------------------------------------------ */
+  const smooth = fine.matches && !reduce.matches;
+  let cur = scrollY, tgt = scrollY, running = false, tween = null, lastSet = scrollY, lastT = 0, locked = false;
+  if (smooth) root.classList.add('has-smooth');
+
+  const frame = now => {
+    const dt = Math.min(64, now - (lastT || now - 16.7)); lastT = now;
+    if (tween) {
+      const t = clamp((now - tween.t0) / tween.d, 0, 1);
+      cur = tween.from + (tween.to - tween.from) * easeIO(t);
+      tgt = cur;
+      if (t >= 1) { const done = tween.done; tween = null; done && done(); }
+    } else {
+      const k = 1 - Math.pow(1 - .085, dt / 16.7);       /* frame-rate independent lerp */
+      cur += (tgt - cur) * k;
+      if (Math.abs(tgt - cur) < .4) cur = tgt;
+    }
+    scrollTo(0, cur); lastSet = scrollY;
+    if (tween || cur !== tgt) requestAnimationFrame(frame);
+    else { running = false; lastT = 0; }
+  };
+  const kick = () => { if (!running) { running = true; requestAnimationFrame(frame); } };
+  const stop = () => { tween = null; cur = tgt = scrollY; };
+
+  /* animated jump used by anchors (works with or without the wheel engine) */
+  const scrollToY = (y, d, done) => {
+    y = clamp(y, 0, maxY());
+    if (reduce.matches) { scrollTo(0, y); cur = tgt = y; done && done(); return; }
+    cur = scrollY;
+    tween = { from: cur, to: y, t0: performance.now(), d, done };
+    kick();
+  };
+
+  addEventListener('touchstart', () => { if (tween) stop(); }, { passive: true });
+  if (smooth) {
+    addEventListener('wheel', e => {
+      if (e.ctrlKey || locked || root.classList.contains('menu-open')) { if (locked) e.preventDefault(); return; }
+      if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;          /* horizontal trackpad swipes stay native */
+      e.preventDefault();
+      const unit = e.deltaMode === 1 ? 36 : e.deltaMode === 2 ? innerHeight : 1;
+      if (tween) stop();
+      tgt = clamp(tgt + e.deltaY * unit, 0, maxY());
+      kick();
+    }, { passive: false });
+    /* any scroll we didn't cause (keys, scrollbar drag) resyncs the engine */
+    addEventListener('scroll', () => { if (!running || Math.abs(scrollY - lastSet) > 2) { if (running && !tween) tgt = cur = scrollY; else if (!running) cur = tgt = scrollY; } }, { passive: true });
+    addEventListener('resize', () => { tgt = clamp(tgt, 0, maxY()); });
+  }
+
+  /* ------------------------------------------------------------------
+     3. PAGE-TURN TRANSITIONS for navigation.
+        Long jumps get a printed "page" that wipes over the screen,
+        names the destination, and peels away; short jumps glide.
+     ------------------------------------------------------------------ */
+  const curtain = $('.curtain');
+  const cNum = $('.curtain__num'), cName = $('.curtain__name');
+  const labelOf = el => {
+    const raw = (el.closest('[data-label]') || el).dataset.label || 'Cover';
+    const m = raw.match(/^(.*?)\s+—\s+(.*)$/);
+    return m ? { n: m[1], name: m[2] } : { n: 'Issue 01', name: raw };
+  };
+  const focusTarget = el => { if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '-1'); el.focus({ preventScroll: true }); };
+
+  const go = (el, hash) => {
+    const y = el === document.body ? 0 : el.getBoundingClientRect().top + scrollY;
+    const dist = Math.abs(y - scrollY);
+    const finish = () => { history.replaceState(null, '', hash); focusTarget(el); };
+    if (reduce.matches) { scrollTo(0, y); finish(); return; }
+    if (dist > innerHeight * 1.8 && curtain) {
+      const { n, name } = labelOf(el);
+      cNum.textContent = n; cName.textContent = name;
+      locked = true;
+      curtain.classList.remove('is-out'); curtain.classList.add('is-in');
+      setTimeout(() => {
+        tween = null; scrollTo(0, y); cur = tgt = lastSet = scrollY;
+        onScroll(true);
+        setTimeout(() => {
+          curtain.classList.add('is-out');
+          locked = false; finish();
+          setTimeout(() => curtain.classList.remove('is-in', 'is-out'), 900);
+        }, 380);
+      }, 720);
+    } else {
+      scrollToY(y, clamp(500 + dist * .45, 700, 1400), finish);
+    }
+  };
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a[href^="#"]');
+    if (!a || e.metaKey || e.ctrlKey || e.shiftKey || e.button) return;
+    const hash = a.getAttribute('href');
+    const el = hash === '#top' ? $('#top') : (hash.length > 1 && document.getElementById(hash.slice(1)));
+    if (!el || a.classList.contains('skip')) return;
+    e.preventDefault();
+    go(el, hash);
+  });
+
+  /* ------------------------------------------------------------------
+     4. REVEAL ON SCROLL
+     ------------------------------------------------------------------ */
   const targets = $$('[data-reveal]');
   if (reduce.matches || !('IntersectionObserver' in window)) {
     targets.forEach(t => t.classList.add('in'));
   } else {
     const io = new IntersectionObserver(es => es.forEach(e => {
       if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-    }), { rootMargin: '0px 0px -10% 0px', threshold: 0.08 });
+    }), { rootMargin: '0px 0px -12% 0px', threshold: 0.06 });
     targets.forEach(t => io.observe(t));
   }
 
-  /* header compact + progress + parallax (one rAF loop on scroll) */
+  /* ------------------------------------------------------------------
+     5. SCROLL-LINKED ART DIRECTION (one rAF per frame)
+        – header: compact, hides on the way down, returns on the way up
+        – progress rail
+        – cover: the name splits apart, the portrait sinks back
+        – editorial plates settle from 1.07 → 1 as they cross the page
+        – parallax on marked figures
+        – marquee picks up speed with scroll velocity
+     ------------------------------------------------------------------ */
   const fill = $('.rail__fill');
   const par = $$('[data-parallax]');
-  let ticking = false;
-  const onScroll = () => {
-    const y = scrollY, max = document.documentElement.scrollHeight - innerHeight;
+  const n1 = $('.hero__n--1'), n2 = $('.hero__n--2'), hp = $('.hero__photo'), hside = $$('.hero__side, .hero__cover');
+  const plates = $$('.studly__media img, .creamy__media img, .deck__media img, .off__fig img, .browser__shot img');
+  let prevY = scrollY, vel = 0, ticking = false;
+
+  const onScroll = force => {
+    const y = scrollY, h = innerHeight, wide = innerWidth > 900, motion = !reduce.matches;
+    const dy = y - prevY; prevY = y;
+    if (Math.abs(dy) < h) vel = vel * .8 + dy * .2;
     root.classList.toggle('is-compact', y > 40);
-    if (fill) fill.style.transform = `scaleY(${max > 0 ? Math.min(1, y / max) : 0})`;
-    if (!reduce.matches && innerWidth > 900) {
+    if (!root.classList.contains('menu-open')) {
+      if (y < h * .6 || dy < -4 || force === true) root.classList.remove('head-away');
+      else if (dy > 4) root.classList.add('head-away');
+    }
+    if (fill) { const m = maxY(); fill.style.transform = `scaleY(${m > 0 ? clamp(y / m, 0, 1) : 0})`; }
+
+    if (motion && wide) {
+      if (y < h * 1.2) {
+        const p = clamp(y / h, 0, 1);
+        n1.style.translate = `${(-p * 5).toFixed(2)}vw 0`;
+        n2.style.translate = `${(p * 4).toFixed(2)}vw 0`;
+        hp.style.translate = `0 ${(p * 14).toFixed(2)}vh`;
+        hp.style.scale = (1 - p * .06).toFixed(4);
+        hside.forEach(s => { s.style.opacity = clamp(1 - p * 2.4, 0, 1).toFixed(3); s.style.translate = `0 ${(p * 8).toFixed(2)}vh`; });
+      }
       par.forEach(el => {
         const r = el.getBoundingClientRect();
-        if (r.bottom < -200 || r.top > innerHeight + 200) return;
-        const off = (r.top + r.height / 2 - innerHeight / 2) * parseFloat(el.dataset.parallax);
-        el.style.translate = `0 ${off.toFixed(1)}px`;
+        if (r.bottom < -200 || r.top > h + 200) return;
+        el.style.translate = `0 ${((r.top + r.height / 2 - h / 2) * parseFloat(el.dataset.parallax)).toFixed(1)}px`;
       });
-    } else par.forEach(el => el.style.translate = '');
+      plates.forEach(img => {
+        const r = img.parentElement.getBoundingClientRect();
+        if (r.bottom < 0 || r.top > h) return;
+        const p = clamp((h - r.top) / (h + r.height), 0, 1);
+        img.style.scale = (1.07 - p * .07).toFixed(4);
+      });
+    } else if (force === 'reset') {
+      [n1, n2, hp, ...hside, ...par].forEach(el => { el.style.translate = ''; el.style.scale = ''; el.style.opacity = ''; });
+      plates.forEach(img => img.style.scale = '');
+    }
     ticking = false;
   };
   addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
-  addEventListener('resize', onScroll, { passive: true });
-  onScroll();
+  addEventListener('resize', () => onScroll('reset'), { passive: true });
+  onScroll(true);
 
-  /* active section → rail label + nav state */
+  /* marquee driven by JS so it can respond to scroll velocity */
+  if (!reduce.matches) {
+    const rows = $$('.marq').map((m, i) => ({ el: m, track: $('.marq__track', m), x: 0, dir: i % 2 ? 1 : -1, hover: 0, on: false, w: 0 }));
+    root.classList.add('marq-js');
+    const mio = new IntersectionObserver(es => es.forEach(e => { const r = rows.find(r => r.el === e.target); if (r) r.on = e.isIntersecting; }));
+    rows.forEach(r => {
+      mio.observe(r.el);
+      r.el.addEventListener('pointerenter', () => r.hover = 1);
+      r.el.addEventListener('pointerleave', () => r.hover = 0);
+    });
+    const measure = () => rows.forEach(r => r.w = r.track.scrollWidth / 2);
+    measure(); addEventListener('resize', measure); document.fonts && document.fonts.ready.then(measure);
+    let t0 = 0;
+    const tick = now => {
+      const dt = Math.min(50, now - (t0 || now)); t0 = now;
+      const boost = Math.min(4, Math.abs(vel) * .12);
+      vel *= .94;
+      rows.forEach(r => {
+        if (!r.on || !r.w) return;
+        r.k = (r.k ?? 1) + (((1 - r.hover * .9) * (1 + boost)) - (r.k ?? 1)) * .08;
+        r.x += r.dir * .045 * dt * r.k;
+        if (r.x <= -r.w) r.x += r.w; else if (r.x > 0) r.x -= r.w;
+        r.track.style.transform = `translate3d(${r.x.toFixed(2)}px,0,0)`;
+      });
+      requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
+
+  /* ------------------------------------------------------------------
+     6. ACTIVE SECTION → rail label (with a small swap) + nav state
+     ------------------------------------------------------------------ */
   const label = $('.rail__label');
   const navLinks = $$('.nav a');
+  const setLabel = txt => {
+    if (!label || label.textContent === txt) return;
+    if (reduce.matches || !label.animate) { label.textContent = txt; return; }
+    label.animate([{ opacity: 1, transform: 'rotate(180deg) translateY(0)' }, { opacity: 0, transform: 'rotate(180deg) translateY(10px)' }], { duration: 220, easing: 'ease-in' })
+      .onfinish = () => {
+        label.textContent = txt;
+        label.animate([{ opacity: 0, transform: 'rotate(180deg) translateY(-10px)' }, { opacity: 1, transform: 'rotate(180deg) translateY(0)' }], { duration: 420, easing: 'cubic-bezier(.16,1,.3,1)' });
+      };
+  };
   const sio = new IntersectionObserver(es => es.forEach(e => {
     if (!e.isIntersecting) return;
-    if (label) label.textContent = e.target.dataset.label;
+    setLabel(e.target.dataset.label);
     const id = e.target.closest('#cases') ? 'work' : e.target.id;
     navLinks.forEach(a => a.setAttribute('aria-current', a.getAttribute('href') === '#' + id ? 'true' : 'false'));
   }), { rootMargin: '-45% 0px -50% 0px' });
   $$('[data-label]').forEach(s => sio.observe(s));
 
-  /* mobile menu */
+  /* ------------------------------------------------------------------
+     7. MOBILE MENU
+     ------------------------------------------------------------------ */
   const btn = $('.menu-btn'), menu = $('#menu');
   const setMenu = open => {
     root.classList.toggle('menu-open', open);
+    root.classList.remove('head-away');
     btn.setAttribute('aria-expanded', open);
     open ? menu.removeAttribute('inert') : menu.setAttribute('inert', '');
     document.body.style.overflow = open ? 'hidden' : '';
@@ -1204,13 +1431,15 @@ figcaption{margin-top:12px;display:flex;justify-content:space-between;gap:16px;c
   addEventListener('keydown', e => { if (e.key === 'Escape' && root.classList.contains('menu-open')) { setMenu(false); btn.focus(); } });
   addEventListener('resize', () => { if (innerWidth > 900 && root.classList.contains('menu-open')) setMenu(false); });
 
-  /* custom cursor + contents preview (desktop pointers only) */
+  /* ------------------------------------------------------------------
+     8. CUSTOM CURSOR + CONTENTS PREVIEW (desktop pointers only)
+     ------------------------------------------------------------------ */
   if (fine.matches) {
     root.classList.add('has-cursor');
-    const cur = $('.cursor'), lab = $('.cursor__lab');
+    const cur = $('.cursor');
     let x = innerWidth / 2, y = innerHeight / 2, cx = x, cy = y;
     const pv = $('.preview');
-    let px = x, py = y, pvOn = false;
+    let px = x, py = y, pvOn = false, pvR = 0;
     addEventListener('pointermove', e => { x = e.clientX; y = e.clientY; cur.classList.remove('is-hidden'); }, { passive: true });
     document.addEventListener('pointerleave', () => cur.classList.add('is-hidden'));
     document.addEventListener('pointerover', e => {
@@ -1223,7 +1452,11 @@ figcaption{margin-top:12px;display:flex;justify-content:space-between;gap:16px;c
       const k = reduce.matches ? 1 : .22;
       cx += (x - cx) * k; cy += (y - cy) * k;
       cur.style.transform = `translate3d(${cx}px,${cy}px,0)`;
-      if (pvOn) { px += (x - px) * .12; py += (y - py) * .12; pv.style.transform = `translate3d(calc(${px}px - 50%),calc(${py}px - 50%),0) scale(1)`; }
+      if (pvOn) {
+        const dx = x - px; px += dx * .12; py += (y - py) * .12;
+        pvR += (clamp(dx * .04, -6, 6) - pvR) * .15;             /* preview leans into the motion */
+        pv.style.transform = `translate3d(calc(${px}px - 50%),calc(${py}px - 50%),0) rotate(${pvR.toFixed(2)}deg)`;
+      }
       requestAnimationFrame(loop);
     };
     loop();
@@ -1231,13 +1464,24 @@ figcaption{margin-top:12px;display:flex;justify-content:space-between;gap:16px;c
       it.addEventListener('pointerenter', () => {
         const from = it.dataset.previewFrom && document.querySelector(it.dataset.previewFrom);
         const img = it.dataset.previewSrc || (from && (from.currentSrc || from.src)), txt = it.dataset.previewText || '';
-        pv.innerHTML = img ? `<img src="${img}" alt="">` : `<span class="preview__t">${txt}</span>`;
-        px = x; py = y; pvOn = true; pv.classList.add('is-on');
+        const html = img ? `<img src="${img}" alt="">` : `<span class="preview__t">${txt}</span>`;
+        if (pvOn) {                                               /* swap with a vertical wipe between rows */
+          const nxt = document.createElement('div'); nxt.className = 'preview__layer'; nxt.innerHTML = html;
+          pv.appendChild(nxt);
+          requestAnimationFrame(() => nxt.classList.add('is-on'));
+          setTimeout(() => { [...pv.children].slice(0, -1).forEach(c => c.remove()); }, 650);
+        } else {
+          pv.innerHTML = `<div class="preview__layer is-on">${html}</div>`;
+          px = x; py = y;
+        }
+        pvOn = true; pv.classList.add('is-on');
       });
-      it.addEventListener('pointerleave', () => { pvOn = false; pv.classList.remove('is-on'); });
+      it.addEventListener('pointerleave', e => {
+        if (e.relatedTarget && e.relatedTarget.closest && e.relatedTarget.closest('.index__item')) return;
+        pvOn = false; pv.classList.remove('is-on');
+      });
     });
   }
-
 })();
 </script>
 </body>
