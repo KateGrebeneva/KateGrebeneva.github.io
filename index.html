@@ -17,7 +17,7 @@
 <meta name="twitter:description" content="Portfolio of Catherine Grebeneva — full-stack developer and digital designer.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Inter+Tight:ital,wght@0,300..700;1,300..500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Prata&family=Playfair+Display:ital,wght@1,400..700&family=Inter+Tight:ital,wght@0,300..700;1,300..500&display=swap" rel="stylesheet">
 <script>document.documentElement.classList.add('js');</script>
 <style>
 /* ==========================================================================
@@ -29,8 +29,8 @@
    COLOR  — paper (blush ivory) · ink (true black) · charcoal · smoke
             accent: fuchsia, inherited from the old pink portfolio, used
             only as a "printer's mark" (issue number, active states).
-   TYPE   — Playfair Display (Didone, Vogue-like): mastheads, headlines, italics.
-            Bodoni Moda: numerals only.
+   TYPE   — Prata (Didone, closest free cut to the Vogue Didot): mastheads,
+            headlines, numerals. Playfair Display Italic: italic accents.
             Inter Tight: body, captions, labels.
             Scale contrast: 13vw masthead vs 11px captions.
    SPACE  — 4px base; section rhythm --sec; margins --m; gutter --g.
@@ -53,8 +53,9 @@
   --inv-smoke:#8F8884;
   --inv-line:rgba(242,237,234,.16);
 
-  --f-display:"Playfair Display","Didot","Bodoni 72",Georgia,"Times New Roman",serif;
-  --f-num:"Bodoni Moda","Bodoni 72","Didot","Bodoni MT",Georgia,serif;
+  --f-display:"Prata","Didot","Bodoni 72",Georgia,"Times New Roman",serif;
+  --f-italic:"Playfair Display","Didot","Bodoni 72",Georgia,serif;
+  --f-num:var(--f-display);
   --f-sans:"Inter Tight","Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;
 
   --fs-name:clamp(2.4rem,13.2vw,17rem);
@@ -143,7 +144,7 @@ ul,ol{padding:0;list-style:none}
 .meta dd:last-child{margin-bottom:0}
 
 /* ---------- reveal system (only when JS runs) ---------- */
-.ln{display:block;overflow:hidden;padding:0 .1em .08em 0;margin:0 -.1em -.08em 0}
+.ln{display:block;overflow:hidden;padding:.2em .12em .14em 0;margin:-.2em -.12em -.14em 0}
 .js .ln>span{display:inline-block;transform:translate3d(0,110%,0);transition:transform 1.25s var(--ease);transition-delay:calc(var(--d,0) * 85ms)}
 .js .in .ln>span,.js .ln.in>span{transform:none}
 .js [data-reveal="fade"]{opacity:0;transform:translate3d(0,22px,0);transition:opacity 1.1s var(--ease),transform 1.1s var(--ease);transition-delay:calc(var(--d,0) * 90ms)}
@@ -648,11 +649,18 @@ figcaption{margin-top:12px;display:flex;justify-content:space-between;gap:16px;c
   .approach__out p span:nth-child(n){margin-right:0}
 }
 
-/* Bodoni Moda, heavier: keeps the high-contrast display cut but gives the hairlines body */
-.disp,.hero__n,.case__title,.idea__w,.creamy__vt,.num,.marq__set span,.curtain__name,.menu__list a,.index__item .t,.exp__p,.contact__links .h,.hero__cover b,.ifc__h,.mini__h,.logo,.deck__box ol,.about__meta dd,.preview__t,.ifc__nav b{font-weight:500}
+/* Prata ships one weight: never let the browser fake a bold */
+.disp,.hero__n,.case__title,.idea__w,.creamy__vt,.num,.marq__set span,.curtain__name,.menu__list a,.index__item .t,.exp__p,.contact__links .h,.hero__cover b,.ifc__h,.mini__h,.logo,.deck__box ol,.about__meta dd,.preview__t,.ifc__nav b{font-weight:400;font-synthesis:none}
 .lead,.it,.off__quote,.hero__quote,.about__text p:first-child::first-letter{font-weight:400}
-/* numerals keep Bodoni Moda */
-.num,.index__item .n{font-family:var(--f-num);font-weight:560}
+/* numerals in Prata, upright */
+.num,.index__item .n{font-family:var(--f-num);font-weight:400;font-style:normal}
+/* italic accents: Prata has no italic, so the Didone italic comes from Playfair Display */
+em,i,.it,.lead,.off__quote,.hero__quote,.idea__w--1,.marq--rev .marq__set span,.curtain__name,.hero__roles .x,.fire__feats li span,.ifc__nav b,.ifc__h i,.preview__t,
+.index__item:hover .t,.exp__row:hover .exp__p,.contact__links a:hover .h,.menu__list a:hover em{font-family:var(--f-italic);font-style:italic;font-weight:400}
+.idea__w--1{letter-spacing:-.04em}
+.lead,.off__quote{font-weight:400}
+.about__text p:first-child::first-letter{font-family:var(--f-display);font-style:normal}
+.menu__list em{font-family:var(--f-display);font-style:normal}
 /* ==========================================================================
    SCROLL & TRANSITIONS
    ========================================================================== */
